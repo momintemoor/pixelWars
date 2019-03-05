@@ -1,7 +1,8 @@
 span {
-    color: green;
-    font-family: "Arial",;
+    color: blueviolet;
 }
+
+
 body {
     background-color: darkgrey;
     -webkit-animation:mymove 5s infinite;
@@ -10,7 +11,17 @@ body {
     from{background-color:lightgrey;}
     to {background-color:darkgrey;}
 }
+/*
 body {
     background: #133fff;
     background: linear-gradient(grey, orange, blue);
+}
+*/
+p.top_bar {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    background-color: darkblue;
+    width: 1000px;
+
 }
