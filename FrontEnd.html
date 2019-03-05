@@ -13,19 +13,23 @@
 </head>
 <body onload="startGame()">
 <h1><b>Pixel Wars</b></h1>
+<h2>Demolish your friends with hundreds of upgradable weapons shot from your very own customizable player cube in this action-packed online multiplayer game 'Pixel Wars'</h2>
+
 <script>
-    var myGamePiece;
+    var myGamePiece1;
+    var myGamePiece2;
 
     function startGame() {
-        myGamePiece = new component(30, 30, "red", 10, 10);
+        myGamePiece1 = new component(30, 30, "red", 10, 10);
+        myGamePiece2 = new component(30, 30, "blue", 250, 400);
         myGameArea.start();
     }
 
     var myGameArea = {
         canvas : document.createElement("canvas"),
         start : function() {
-            this.canvas.width = 480;
-            this.canvas.height = 270;
+            this.canvas.width = 700;
+            this.canvas.height = 500;
             this.context = this.canvas.getContext("2d");
             document.body.insertBefore(this.canvas, document.body.childNodes[0]);
             this.interval = setInterval(updateGameArea, 20);
@@ -49,11 +53,10 @@
 
     function updateGameArea() {
         myGameArea.clear();
-        myGamePiece.update();
+        myGamePiece1.update();
+        myGamePiece2.update();
     }
 </script>
-
-<p>We have created a game area! (or at least an empty canvas)</p>
 
 </body>
 </html>
