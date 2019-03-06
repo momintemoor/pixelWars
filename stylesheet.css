@@ -11,7 +11,7 @@ body {
     from{background-color:lightgrey;}
     to {background-color:black;}
 }
-/* slowly get blacker over the course of game, sped up for demo purposes */
+/* slowly get blacker over the course of game, sped up for demo purposes, will turn black over course of game, but not turn back because that would be jarring  */
 /*
 body {
     background: #133fff;
