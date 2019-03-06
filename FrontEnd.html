@@ -12,6 +12,8 @@
             background-color: #f1f1f1;
         }
     </style>
+    <script src="game.js"></script>
+    <script src="users.py"></script>
 </head>
 
 <body onload = "startGame()"; background="background.jpg">
@@ -29,18 +31,18 @@
                 <h1>Log in</h1>
                 <p>
                     <label for="username" class="uname" data-icon="u" > Your email or username </label>
-                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
+                    id:<input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
                 </p>
                 <p>
                     <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                    pass:<input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
                 </p>
                 <p class="keeplogin">
                     <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
                     <label for="loginkeeping">Keep me logged in</label>
                 </p>
                 <p class="login button">
-                    <input type="submit" value="Login" />
+                    <button onClick="authenticateLogin();">Login</button>
                 </p>
                 <p class="change_link">
                     Not a member yet ?
@@ -54,22 +56,22 @@
                 <h1> Sign up </h1>
                 <p>
                     <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+                    userN:<input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
                 </p>
                 <p>
                     <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
-                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>
+                    userE:<input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>
                 </p>
                 <p>
                     <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                    userP:<input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
                 </p>
                 <p>
                     <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                    userCP:<input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
                 </p>
                 <p class="signin button">
-                    <input type="submit" value="Sign up"/>
+                    <button onClick="add_user();">Sign up</button>
                 </p>
                 <p class="change_link">
                     Already a member ?
@@ -80,48 +82,7 @@
 
     </div>
 </div>
-<script>
-    var myGamePiece1;
-    var myGamePiece2;
 
-    function startGame() {
-        myGamePiece1 = new component(30, 30, "red", 10, 10, "image");
-        myGamePiece2 = new component(30, 30, "blue", 150, 150, "image");
-        myGameArea.start();
-    }
-
-    var myGameArea = {
-        canvas : document.createElement("canvas"),
-        start : function() {
-            this.canvas.width = 1500;
-            this.canvas.height = 700;
-            this.context = this.canvas.getContext("2d");
-            document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-            this.interval = setInterval(updateGameArea, 20);
-        },
-        clear : function() {
-            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        }
-    }
-
-    function component(width, height, color, x, y) {
-        this.width = width;
-        this.height = height;
-        this.x = x;
-        this.y = y;
-        this.update = function(){
-            ctx = myGameArea.context;
-            ctx.fillStyle = color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-        }
-    }
-
-    function updateGameArea() {
-        myGameArea.clear();
-        myGamePiece1.update();
-        myGamePiece2.update();
-    }
-    </script>
 </font>
 </body>
 </html>

@@ -6,12 +6,11 @@ span {
 body {
     background-color: darkgrey;
     -webkit-animation:mymove 5s infinite;
-    animation: mymove 25s ;}
+    animation: mymove 30s ;}
 @-webkit-keyframes mymove{
     from{background-color:lightgrey;}
-    to {background-color:black;}
+    to {background-color:darkgrey;}
 }
-/* slowly get blacker over the course of game, sped up for demo purposes */
 /*
 body {
     background: #133fff;
