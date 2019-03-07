@@ -1,1 +1,4 @@
 this is a file for notes
+potential ideas to add to the CSS:
+
+ - drop down menu for logins?

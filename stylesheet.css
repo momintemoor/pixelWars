@@ -2,7 +2,13 @@ span {
     color: blueviolet;
 }
 
-
+/*reject by Tanvie for being too tacky*/
+/*
+body{
+    background:red;
+    background:linear-gradient(grey, orange, blue);
+}
+*/
 body {
     background-color: darkgrey;
     -webkit-animation:mymove 5s infinite;
@@ -26,3 +32,17 @@ p.top_bar {
     width: 1000px;
 
 }
+/*
+.yes {
+    color: #00008b;
+    background-color;
+    text-align: center;
+    line-height: 20px;
+    margin: 20px;
+    border-style:solid;
+    border-width:3px;
+    border-color:#6f00ff;
+    width: 500px;
+     maybe include the command column-gap
+}
+*/
