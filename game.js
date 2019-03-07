@@ -58,3 +58,26 @@ function add_user() {
     ajaxPostRequest("/send", toSend, update_users);
 
 }
+/*
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return; // Do nothing if the event was already processed
+  }
+
+  switch (event.key) {
+    case "ArrowDown":
+      //"down arrow" key press.
+      break;
+    case "ArrowUp":
+      //"up arrow" key press.
+      break;
+    case ArrowLeft:
+      //"left arrow" key press.
+      break;
+    case "ArrowRight":
+      //right arrow key press.
+      break;
+    default:
+      return; // Quit when this doesn't handle the key event.
+  }
+*/
