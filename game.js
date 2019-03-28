@@ -59,6 +59,16 @@ function add_user() {
 
 }
 /*
+function keyCode(event) {
+    var x = event.keyCode;
+    if (x == 087) {
+        alert ("W key has been pressed");
+    }
+}
+
+
+*/
+/*
 window.addEventListener("keydown", function (event) {
   if (event.defaultPrevented) {
     return; // Do nothing if the event was already processed
@@ -67,7 +77,7 @@ window.addEventListener("keydown", function (event) {
   switch (event.key) {
     case "ArrowDown":
       //"down arrow" key press.
-      break;
+      console.log("arrow is pressed")
     case "ArrowUp":
       //"up arrow" key press.
       break;

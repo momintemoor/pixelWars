@@ -1,5 +1,6 @@
 package model
 
+
 object compute {
   def bulletEnd(bullet: Bullet, time: Double): TwoDvector = {
     var xdir : Double = bullet.l.x + (bullet.v.x * time)
