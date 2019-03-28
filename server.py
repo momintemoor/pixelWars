@@ -7,7 +7,6 @@ import users
 def any_name():
     return bottle.static_file("FrontEnd.html", root="")
 
-
 @bottle.route("/game.js")
 def any_name():
     return bottle.static_file("game.js", root="")
@@ -18,9 +17,6 @@ def register_user():
     content = json.loads(content)
     users.update_users(content)
     return json.dumps(users.view_users())
-
-
-
 
 
 bottle.run(host="0.0.0.0", port=8080, debug=True)
