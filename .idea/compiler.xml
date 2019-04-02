@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="backend" />
+        <module name="pom.xml" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="backend" target="1.5" />
+      <module name="pom.xml" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
