@@ -39,23 +39,54 @@ function updateGameArea() {
     myGamePiece2.update();
 }
 
+function ajaxGetRequest(path, callback){
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function(){
+        if (this.readyState === 4 && this.status === 200){
+            callback(this.response);
+        }
+    };
+    request.open("GET", path);
+    request.send();
+}
+
+function ajaxPostRequest(path, data, callback){
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function(){
+        if (this.readyState === 4 && this.status === 200){
+            callback(this.response);
+        }
+    };
+    request.open("POST", path);
+    request.send(data);
+}
+
+function action_on_response(response){
+    console.log("The server responded with: " + response);
+}
+function called_on_button_press(){
+    ajaxPostRequest("/some_path", "Button pressed", action_on_response);
+}
+
+function showUsers(response){
+    var users = "";
+    for(var data in JSON.parse(response)){
+        users = users + data.username + "</br>";
+    }
+    document.getElementById("users").innerHTML = users;
+}
+function loadUsers(){
+    ajaxGetRequest("/users", showUsers);
+}
 
 function add_user() {
-    var nameElement = document.getElementById("userN");
-    var name = nameElement.value;
+    var nameElement = document.getElementById("username");
+
+    var username = nameElement.value;
     nameElement.value = "";
+    var toSend = JSON.stringify({"username": username});
 
-    var emailElement = document.getElementById("userE");
-    var email = emailElement.value;
-    emailElement.value = "";
-
-    var passElement = document.getElementById("userP");
-    var pass = passElement.value;
-    passElement.value = "";
-
-    var toSend = JSON.stringify({"userN": name, "userE": email,"userP": pass});
-
-    ajaxPostRequest("/send", toSend, update_users);
+    ajaxPostRequest("/Login", toSend, showUsers);
 
 }
 /*
