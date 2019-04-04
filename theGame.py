@@ -3,7 +3,9 @@ import math
 
 pygame.init()
 pygame.display.set_caption("Pixel Wars")
-screen = pygame.display.set_mode((600, 480))
+widthS = 600
+heightS = 480
+screen = pygame.display.set_mode((widthS, heightS))
 image = pygame.Surface((16, 16))
 image.fill((0, 0, 0))
 image.set_colorkey((0, 0, 0))
@@ -21,17 +23,44 @@ class Bullet(pygame.sprite.Sprite):
         self.position += self.velocity  # add velocity to bullet
         self.rect.center = self.position
 
+class Player(pygame.sprite.Sprite):
+    def __init__(self, surface, width, height, size):
+        self.image = pygame.Surface((32, 32))
+        self.image.fill((0, 0, 0))
+        self.image.set_colorkey((0, 0, 0))
+        self.surface = surface
+        self.height = height
+        self.width = width
+        self.size = size
+        self.x = (0 + (self.width/10))
+        self.y = self.height - self.size
+        self.x_move = 0
+        self.y_move = 0
+        self.rect = self.image.get_rect(center=(200, 200))
+        self.pos = pygame.Vector2(self.rect.center)
+
+
+    def keyPress(self, key):
+        if key == pygame.K_a:
+            self.x -= 10
+        elif key == pygame.K_d:
+            self.x += 10
+        elif key == pygame.K_w:
+            self.y -= 10
+        elif key == pygame.K_s:
+            self.y += 10
+
+    def draw(self):
+        pygame.draw.rect(self.surface, pygame.Color('red'), [self.x, self.y, self.size, self.size])
+
+
 def main():
+
     clock = pygame.time.Clock()
-    player = pygame.Surface((60, 22), pygame.SRCALPHA)
-    pygame.draw.rect(player, pygame.Color('red'), [0, 0, 32, 32])
-    first_player = player
-    player_cent = player.get_rect(center=(320, 240))
+    player = Player(screen, widthS, heightS, 50)
     angle = 0
     # Add bullets to this group.
     bullet_group = pygame.sprite.Group()
-    moveX = 0
-    moveY = 0
 
     running = True
     while running:
@@ -40,28 +69,18 @@ def main():
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    bullet_group.add(Bullet(player_cent.center, angle))
+                    bullet_group.add(Bullet(player.rect.center, angle))
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a:
-                    moveX -= 1
-                if event.key == pygame.K_d:
-                    moveX += 1
-                if event.key == pygame.K_w:
-                    moveY += 1
-                if event.key == pygame.K_s:
-                    moveY -= 1
+                player.keyPress(event.key)
+
 
         bullet_group.update()
-        x, y = pygame.math.Vector2(pygame.mouse.get_pos()) - player_cent.center  # get the cursor position
+        x, y = pygame.math.Vector2(pygame.mouse.get_pos()) - player.rect.center  # get the cursor position
         angle = math.degrees(math.atan2(y, x))
 
-
-        screen.fill((0, 0, 0))
-        pygame.draw.rect(first_player, pygame.Color('red'), [moveX, moveY, 32, 32])
-
         screen.fill(pygame.Color('black'))
+        player.draw()
         bullet_group.draw(screen)
-        screen.blit(player, player_cent)
         pygame.display.update()
         clock.tick(60)
 
