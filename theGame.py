@@ -25,6 +25,7 @@ class Bullet(pygame.sprite.Sprite):
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, surface, width, height, size):
+        super(Player, self).__init__()
         self.image = pygame.Surface((32, 32))
         self.image.fill((0, 0, 0))
         self.image.set_colorkey((0, 0, 0))
@@ -36,31 +37,39 @@ class Player(pygame.sprite.Sprite):
         self.y = self.height - self.size
         self.x_move = 0
         self.y_move = 0
-        self.rect = self.image.get_rect(center=(200, 200))
-        self.pos = pygame.Vector2(self.rect.center)
-
+        self.rect = self.image.get_rect(center=(self.x + 20, self.y + 20))
+        self.health = 100
 
     def keyPress(self, key):
         if key == pygame.K_a:
             self.x -= 10
+            self.rect = self.image.get_rect(center=(self.x + 20, self.y + 20))
         elif key == pygame.K_d:
             self.x += 10
+            self.rect = self.image.get_rect(center=(self.x + 20, self.y + 20))
         elif key == pygame.K_w:
             self.y -= 10
+            self.rect = self.image.get_rect(center=(self.x + 20, self.y + 20))
         elif key == pygame.K_s:
             self.y += 10
+            self.rect = self.image.get_rect(center=(self.x + 20, self.y + 20))
 
-    def draw(self):
-        pygame.draw.rect(self.surface, pygame.Color('red'), [self.x, self.y, self.size, self.size])
+    def draw(self, color):
+        pygame.draw.rect(self.surface, pygame.Color(color), [self.x, self.y, self.size, self.size])
 
 
 def main():
 
     clock = pygame.time.Clock()
+    n = 0
+    n += 1
     player = Player(screen, widthS, heightS, 50)
+    player2 = Player(screen, 5000, 250, 50)
     angle = 0
-    # Add bullets to this group.
     bullet_group = pygame.sprite.Group()
+    player_group = pygame.sprite.Group()
+    if n == 1:
+        player_group.add(player2)
 
     running = True
     while running:
@@ -73,14 +82,24 @@ def main():
             if event.type == pygame.KEYDOWN:
                 player.keyPress(event.key)
 
-
         bullet_group.update()
         x, y = pygame.math.Vector2(pygame.mouse.get_pos()) - player.rect.center  # get the cursor position
         angle = math.degrees(math.atan2(y, x))
 
         screen.fill(pygame.Color('black'))
-        player.draw()
+        player.draw('red')
+        player2.draw('red')
+        player_group.draw(screen)
         bullet_group.draw(screen)
+
+        if pygame.sprite.spritecollide(player2, bullet_group, True):
+            player2.health -= 10
+            if player2.health <= 0:
+                player2.kill()
+                player2.draw('black')
+                player2.health = 0
+            print(player2.health)
+
         pygame.display.update()
         clock.tick(60)
 
