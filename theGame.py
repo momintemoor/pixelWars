@@ -37,6 +37,7 @@ class Player(pygame.sprite.Sprite):
         self.y = self.height - self.size
         self.rect = self.image.get_rect(center=(self.x + 20, self.y + 20))
         self.health = 100
+        self.points = 0
 
     def keyPress(self, key):
         if key == pygame.K_a:
@@ -91,11 +92,15 @@ def main():
 
         if pygame.sprite.spritecollide(player2, bullet_group, True):
             player2.health -= 10
-            if player2.health <= 0:
-                player2.kill()
-                player2.draw('black')
-                player2.health = 0
-            print(player2.health)
+            player.points += 1
+            player2.points -= 1
+            #if player2.health <= 0:
+                #player2.kill()
+                #player2.draw('black')
+                #player2.health = 0
+            #print(player2.health)
+            print("Your Points: " + str(player.points))
+            print("Enemy Points: " + str(player2.points))
 
         pygame.display.update()
         clock.tick(60)
