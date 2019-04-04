@@ -12,5 +12,3 @@ def view_users():
 def update_users(input):
     with open(fileName, "a") as file:
         file.write(input + "\n")
-
-
