@@ -35,8 +35,6 @@ class Player(pygame.sprite.Sprite):
         self.size = size
         self.x = (0 + (self.width/10))
         self.y = self.height - self.size
-        self.x_move = 0
-        self.y_move = 0
         self.rect = self.image.get_rect(center=(self.x + 20, self.y + 20))
         self.health = 100
 
@@ -56,7 +54,6 @@ class Player(pygame.sprite.Sprite):
 
     def draw(self, color):
         pygame.draw.rect(self.surface, pygame.Color(color), [self.x, self.y, self.size, self.size])
-
 
 def main():
 
