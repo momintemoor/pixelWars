@@ -5,7 +5,7 @@ import users
 
 @bottle.route("/")
 def index():
-    return bottle.static_file("FrontEnd.html", root="Frontend.html")
+    return bottle.static_file("FrontEnd.html", root="")
 
 
 @bottle.route("/stylesheet.css")
