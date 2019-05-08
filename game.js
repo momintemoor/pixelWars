@@ -135,4 +135,4 @@ window.addEventListener("keydown", function(event){
         default:
             return; // Quit when this doesn't handle the key event.
     }
-}
+});
