@@ -2,8 +2,8 @@ var myGamePiece1;
 var myGamePiece2;
 
 function startGame() {
-    myGamePiece1 = new component(30, 30, "red", 10, 10, "image");
-    myGamePiece2 = new component(30, 30, "blue", 150, 150, "image");
+    myGamePiece1 = new component(30, 30, "red", 10, 120);
+    myGamePiece2 = new component(30, 30, "blue", 150, 150);
     myGameArea.start();
 }
 
