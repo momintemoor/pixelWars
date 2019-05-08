@@ -2,8 +2,8 @@ var myGamePiece1;
 var myGamePiece2;
 
 function startGame() {
-    myGamePiece1 = new component(30, 30, "red", 10, 10, "image");
-    myGamePiece2 = new component(30, 30, "blue", 150, 150, "image");
+    myGamePiece1 = new component(30, 30, "red", 10, 120);
+    myGamePiece2 = new component(30, 30, "blue", 150, 150);
     myGameArea.start();
 }
 
@@ -19,7 +19,7 @@ var myGameArea = {
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
-}
+};
 
 function component(width, height, color, x, y) {
     this.width = width;
@@ -89,36 +89,50 @@ function add_user() {
     ajaxPostRequest("/Login", toSend, showUsers);
 
 }
-/*
-function keyCode(event) {
-    var x = event.keyCode;
-    if (x == 087) {
-        alert ("W key has been pressed");
+var Key = {
+  _pressed: {},
+
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+
+  isDown: function(keyCode) {
+    return this._pressed[keyCode];
+  },
+
+  onKeydown: function(event) {
+    this._pressed[event.keyCode] = true;
+  },
+
+  onKeyup: function(event) {
+    delete this._pressed[event.keyCode];
+  }
+};
+
+window.addEventListener("keydown", function(event){
+    if (event.defaultPrevented) {
+        return; // Do nothing if the event was already processed
     }
-}
 
-
-*/
-/*
-window.addEventListener("keydown", function (event) {
-  if (event.defaultPrevented) {
-    return; // Do nothing if the event was already processed
-  }
-
-  switch (event.key) {
-    case "ArrowDown":
-      //"down arrow" key press.
-      console.log("arrow is pressed")
-    case "ArrowUp":
-      //"up arrow" key press.
-      break;
-    case ArrowLeft:
-      //"left arrow" key press.
-      break;
-    case "ArrowRight":
-      //right arrow key press.
-      break;
-    default:
-      return; // Quit when this doesn't handle the key event.
-  }
-*/
+    switch (event.key) {
+        case "ArrowDown":
+            //"down arrow" key press.
+            console.log("arrow is pressed");
+            break;
+        case "ArrowUp":
+            //"up arrow" key press.
+            console.log("arrow is pressed");
+            break;
+        case ArrowLeft:
+            //"left arrow" key press.
+            console.log("arrow is pressed");
+            break;
+        case "ArrowRight":
+            //right arrow key press.
+            console.log("arrow is pressed");
+            break;
+        default:
+            return; // Quit when this doesn't handle the key event.
+    }
+});
