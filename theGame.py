@@ -3,8 +3,9 @@ import math
 
 pygame.init()
 pygame.display.set_caption("Pixel Wars")
-widthS = 600
-heightS = 480
+widthS = 1500
+heightS = 750
+FONT = pygame.font.Font(None, 32)
 screen = pygame.display.set_mode((widthS, heightS))
 image = pygame.Surface((16, 16))
 image.fill((0, 0, 0))
@@ -53,12 +54,15 @@ class Player(pygame.sprite.Sprite):
             self.y += 10
             self.rect = self.image.get_rect(center=(self.x + 20, self.y + 20))
 
+
     def draw(self, color):
         pygame.draw.rect(self.surface, pygame.Color(color), [self.x, self.y, self.size, self.size])
 
 def main():
 
     clock = pygame.time.Clock()
+    font=pygame.freetype.SysFont(None, 34)
+    font.origin=True
     n = 0
     n += 1
     player = Player(screen, widthS, heightS, 50)
@@ -84,7 +88,11 @@ def main():
         x, y = pygame.math.Vector2(pygame.mouse.get_pos()) - player.rect.center  # get the cursor position
         angle = math.degrees(math.atan2(y, x))
 
+        # player.rect.clamp_ip(screen)
+
         screen.fill(pygame.Color('black'))
+        txt = FONT.render('points {:.1f}'.format(player.points), True, pygame.Color('red'))
+        screen.blit(txt, (10, 10))
         player.draw('red')
         player2.draw('red')
         player_group.draw(screen)
