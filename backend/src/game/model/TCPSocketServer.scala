@@ -1,4 +1,4 @@
-package towers.model
+package game.model
 
 import java.net.InetSocketAddress
 
@@ -7,14 +7,12 @@ import akka.io.{IO, Tcp}
 import akka.util.ByteString
 import play.api.libs.json.{JsValue, Json}
 
-
 class TCPSocketServer(gameActor: ActorRef) extends Actor {
 
   import Tcp._
   import context.system
 
   IO(Tcp) ! Bind(self, new InetSocketAddress("localhost", 8000))
-
   var webServers: Set[ActorRef] = Set()
   var buffer: String = ""
   val delimiter: String = "~"
@@ -61,10 +59,7 @@ class TCPSocketServer(gameActor: ActorRef) extends Actor {
       case "stop" => gameActor ! StopPlayer(username)
     }
   }
-
 }
-
-
 object TCPSocketServer {
 
   def main(args: Array[String]): Unit = {
@@ -80,5 +75,4 @@ object TCPSocketServer {
     actorSystem.scheduler.schedule(16.milliseconds, 32.milliseconds, gameActor, UpdateGame)
     actorSystem.scheduler.schedule(32.milliseconds, 32.milliseconds, server, SendGameState)
   }
-
 }
